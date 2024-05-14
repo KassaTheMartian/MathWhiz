@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "740392458123",
+    "firebase_url": "https://mathwhiz-47fd0-default-rtdb.firebaseio.com",
+    "project_id": "mathwhiz-47fd0",
+    "storage_bucket": "mathwhiz-47fd0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:740392458123:android:396cc6d33e39476b98418e",
+        "android_client_info": {
+          "package_name": "nguyendinhhieu_63134032.mathwhiz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUsHq6gtekxqL7Bhks6vqezub0D6BJaVw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
