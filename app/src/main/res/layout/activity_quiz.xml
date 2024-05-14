@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2C2D3A"
+    android:orientation="vertical"
+    tools:context=".activity.QuizActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="30dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alata"
+            android:text="01:12"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/clock_icon"
+            app:layout_constraintStart_toEndOf="@+id/clock_icon"
+            app:layout_constraintTop_toTopOf="@+id/clock_icon" />
+
+        <ImageView
+            android:id="@+id/clock_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/clock"
+            android:backgroundTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alata"
+            android:text="Score\n20"
+            android:textAlignment="textEnd"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tv_de"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:background="@drawable/rounded_rectangle"
+        android:paddingVertical="45dp"
+        android:text="2 * 3 / 4"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="50dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+
+    <Button
+        android:id="@+id/bnt_a"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/rounded_rectangle"
+        android:backgroundTint="#F9E8D4"
+        android:paddingVertical="12dp"
+        android:paddingLeft="35dp"
+        android:text="12"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="45dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/tv_de"
+        app:layout_constraintStart_toStartOf="@+id/tv_de"
+        app:layout_constraintTop_toBottomOf="@+id/tv_de" />
+
+    <Button
+        android:id="@+id/bnt_c"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/rounded_rectangle"
+        android:backgroundTint="#F9E8D4"
+        android:paddingVertical="12dp"
+
+        android:paddingLeft="35dp"
+        android:text="49"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="45dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/bnt_b"
+        app:layout_constraintStart_toStartOf="@+id/bnt_b"
+        app:layout_constraintTop_toBottomOf="@+id/bnt_b" />
+
+    <Button
+        android:id="@+id/bnt_d"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/rounded_rectangle"
+        android:backgroundTint="#F9E8D4"
+        android:paddingVertical="12dp"
+        android:paddingLeft="35dp"
+        android:text="53"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="45dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/bnt_c"
+        app:layout_constraintStart_toStartOf="@+id/bnt_c"
+        app:layout_constraintTop_toBottomOf="@+id/bnt_c" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/bnt_d"
+        app:layout_constraintStart_toStartOf="@+id/bnt_d"
+        app:layout_constraintTop_toBottomOf="@+id/bnt_d">
+
+        <TextView
+            android:id="@+id/tv_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="15dp"
+            android:fontFamily="@font/b612_mono"
+            android:text="0/10"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_new_game"
+                android:layout_width="210dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="17dp"
+                android:backgroundTint="#F88360"
+                android:text="New game"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/rg_dokho"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="#ED3636"
+                    android:text="2 số"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:id="@+id/rb_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="#ED3636"
+                    android:checked="true"
+                    android:text="3 số"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:id="@+id/rb_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="#ED3636"
+                    android:text="4 số"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+            </RadioGroup>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bnt_b"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/rounded_rectangle"
+        android:backgroundTint="#F9E8D4"
+        android:paddingVertical="12dp"
+
+        android:paddingLeft="35dp"
+        android:text="33"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="45dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/bnt_a"
+        app:layout_constraintStart_toStartOf="@+id/bnt_a"
+        app:layout_constraintTop_toBottomOf="@+id/bnt_a" />
+</androidx.constraintlayout.widget.ConstraintLayout>
