@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:background="#191717"
         android:paddingTop="5dp"
-        app:menu="@menu/menu"
+        app:menu="@menu/menu_bottom"
         app:itemIconSize="42dp"
         app:labelVisibilityMode="unlabeled"
         app:itemRippleColor="#191727"

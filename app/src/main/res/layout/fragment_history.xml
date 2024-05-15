@@ -6,7 +6,7 @@
     tools:context=".fragment.HistoryFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:background="#A63232"
+        android:background="#2C2D3A"
         android:id="@+id/rv_history"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

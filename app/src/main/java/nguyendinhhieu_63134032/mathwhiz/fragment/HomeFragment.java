@@ -1,5 +1,6 @@
 package nguyendinhhieu_63134032.mathwhiz.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +8,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import java.util.Objects;
 
 import nguyendinhhieu_63134032.mathwhiz.R;
+import nguyendinhhieu_63134032.mathwhiz.activity.QuizActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +21,7 @@ import nguyendinhhieu_63134032.mathwhiz.R;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
+    private Button btnStandard;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +67,14 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        // Khởi tạo Button
+        btnStandard = view.findViewById(R.id.btn_standard);
+        btnStandard.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), QuizActivity.class);
+            startActivity(intent);
+        });
+        return view;
     }
 }
