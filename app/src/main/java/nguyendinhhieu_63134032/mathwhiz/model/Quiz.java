@@ -5,16 +5,17 @@ import java.util.Stack;
 
 public class Quiz {
     String chuoiPhepToan;
-
+    double ketQua;
     public Quiz(String phepToan) {
         this.chuoiPhepToan = phepToan;
     }
 
-    public Quiz(int n){
-        this.chuoiPhepToan = taoChuoiPhepToan(n);
+    public Quiz(int n, String phepToan){
+        this.chuoiPhepToan = taoChuoiPhepToan(n, phepToan);
+        this.ketQua = tinhChuoiPhepToan();
     }
 
-    public static String taoChuoiPhepToan(int n) {
+    public static String taoChuoiPhepToan(int n, String phepToan) {
         Random rand = new Random();
         StringBuilder builder = new StringBuilder();
 
@@ -24,7 +25,7 @@ public class Quiz {
         // Thêm n-1 phép toán và số kèm theo
         for (int i = 0; i < n - 1; i++) {
             // Chọn ngẫu nhiên một toán tử từ +, -, *
-            char operator = "+-*/".charAt(rand.nextInt(4));
+            char operator = phepToan.charAt(rand.nextInt(4));
             // Thêm toán tử vào chuỗi
             builder.append(" ").append(operator).append(" ");
             // Thêm số tiếp theo vào chuỗi
@@ -59,11 +60,9 @@ public class Quiz {
                 toanTu.push(c);
             }
         }
-
         while (!toanTu.empty()) {
             apDungToanTu(numbers, toanTu);
         }
-
         return numbers.pop();
     }
 
@@ -100,5 +99,9 @@ public class Quiz {
 
     public String getChuoiPhepToan() {
         return chuoiPhepToan;
+    }
+
+    public double getKetQua() {
+        return ketQua;
     }
 }

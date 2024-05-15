@@ -61,10 +61,10 @@
 
         <ImageButton
             android:id="@+id/btn_pause"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/pause"
+            android:background="@drawable/pause2"
             android:backgroundTint="#F88360"
             app:layout_constraintBottom_toBottomOf="@+id/tv_score"
             app:layout_constraintEnd_toEndOf="parent"

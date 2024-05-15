@@ -1,11 +1,18 @@
 package nguyendinhhieu_63134032.mathwhiz.activity;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -20,7 +27,9 @@ import androidx.core.view.WindowInsetsCompat;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 import nguyendinhhieu_63134032.mathwhiz.model.Quiz;
 import nguyendinhhieu_63134032.mathwhiz.R;
@@ -36,13 +45,11 @@ public class QuizActivity extends AppCompatActivity {
     private Button btnB;
     private Button btnC;
     private Button btnD;
-    //private Button btnNewGame;
+    private ImageButton btnPause;
     private TextView tvDe;
     private TextView tvScore;
     private TextView tvTime;
-    //private TextView tvCount;
-    //private RadioGroup rgDokho;
-
+    private View activityView;
     private Handler handler = new Handler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +68,14 @@ public class QuizActivity extends AppCompatActivity {
         btnB.setOnClickListener(v -> chonDapAn(btnB));
         btnC.setOnClickListener(v -> chonDapAn(btnC));
         btnD.setOnClickListener(v -> chonDapAn(btnD));
+        btnPause.setOnClickListener(v -> {
+            openPauseDialog();
+        });
         //btnNewGame.setOnClickListener(v -> newGame());
     }
 
     public void chonDapAn(Button btn){
-        if (btn.getText().toString().equals(String.valueOf(listQuiz.get(count).tinhChuoiPhepToan()))){
+        if (btn.getText().toString().equals(String.valueOf(listQuiz.get(count).getKetQua()))){
             countKq++;
             newQues();
         }else {
@@ -86,7 +96,7 @@ public class QuizActivity extends AppCompatActivity {
 
         listQuiz = new ArrayList<>();
         for (int i = 0; i < 15; i++){
-            listQuiz.add(new Quiz(doKho));
+            listQuiz.add(new Quiz(doKho, "+-*/"));
         }
 
         mergeQuiz();
@@ -112,11 +122,21 @@ public class QuizActivity extends AppCompatActivity {
     public void setAns(Quiz quiz){
         Random random = new Random();
         ArrayList<Double> options = new ArrayList<>();
+        Set<Double> uniqueOptions = new HashSet<>();
 
-        options.add(roundToTwoDecimalPlaces(quiz.tinhChuoiPhepToan()));
-        options.add(roundToTwoDecimalPlaces(random.nextDouble() * 15));
-        options.add(roundToTwoDecimalPlaces(random.nextDouble() * 15));
-        options.add(roundToTwoDecimalPlaces(random.nextDouble() * 15));
+        // Thêm kết quả chính xác trước
+        double correctAnswer = roundToTwoDecimalPlaces(quiz.getKetQua());
+        uniqueOptions.add(correctAnswer);
+        options.add(correctAnswer);
+
+        // Thêm các tùy chọn ngẫu nhiên khác nhau
+        while (uniqueOptions.size() < 4) {
+            double randomOption = roundToTwoDecimalPlaces(random.nextInt(21) - 10 + quiz.getKetQua());
+            if (!uniqueOptions.contains(randomOption)) {
+                uniqueOptions.add(randomOption);
+                options.add(randomOption);
+            }
+        }
 
         Collections.shuffle(options); // Trộn thứ tự các lựa chọn
 
@@ -124,7 +144,6 @@ public class QuizActivity extends AppCompatActivity {
         btnB.setText(String.valueOf(options.get(1)));
         btnC.setText(String.valueOf(options.get(2)));
         btnD.setText(String.valueOf(options.get(3)));
-
         tvDe.setText(listQuiz.get(count).getChuoiPhepToan());
     }
 
@@ -158,12 +177,10 @@ public class QuizActivity extends AppCompatActivity {
         btnB = (Button) findViewById(R.id.bnt_b);
         btnC = (Button) findViewById(R.id.bnt_c);
         btnD = (Button) findViewById(R.id.bnt_d);
-        //btnNewGame = (Button) findViewById(R.id.btn_new_game);
+        btnPause = (ImageButton) findViewById(R.id.btn_pause);
         tvDe = (TextView) findViewById(R.id.tv_de);
         tvScore = (TextView) findViewById(R.id.tv_score);
         tvTime = (TextView) findViewById(R.id.tv_time);
-        //tvCount = (TextView) findViewById(R.id.tv_count);
-        //rgDokho = (RadioGroup) findViewById(R.id.rg_dokho);
     }
     private final Runnable updateTimeRunnable = new Runnable() {
         @Override
@@ -176,7 +193,44 @@ public class QuizActivity extends AppCompatActivity {
             handler.postDelayed(this, 1000); // Gửi tin nhắn sau mỗi giây
         }
     };
-    @Override
+    private void  openPauseDialog() {
+        final Dialog dialog = new Dialog(QuizActivity.this);
+        activityView = findViewById(R.id.main);
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_pause);
+        Window window = dialog.getWindow();
+        if (window == null){
+            return;
+        }
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        WindowManager.LayoutParams windowAttributes = window.getAttributes();
+        windowAttributes.gravity = Gravity.CENTER;
+        window.setAttributes(windowAttributes);
+        // Dừng bộ đếm thời gian
+        handler.removeCallbacks(updateTimeRunnable);
+
+        Button btnResume = dialog.findViewById(R.id.btn_resume);
+        Button btnExit = dialog.findViewById(R.id.btn_exit);
+
+        btnResume.setOnClickListener(v -> {
+            dialog.dismiss();
+            handler.post(updateTimeRunnable);
+        });
+
+        btnExit.setOnClickListener(v -> {
+            dialog.dismiss();
+            finish();
+        });
+
+        dialog.setCancelable(true);
+        dialog.show();
+        activityView.setAlpha(0.5f);
+        dialog.setOnDismissListener(dialog1 -> activityView.setAlpha(1f));
+    }
+        @Override
     protected void onResume() {
         super.onResume();
         handler.post(updateTimeRunnable); // Bắt đầu gửi tin nhắn để cập nhật thời gian
