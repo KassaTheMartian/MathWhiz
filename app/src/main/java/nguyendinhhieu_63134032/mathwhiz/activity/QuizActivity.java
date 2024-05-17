@@ -148,15 +148,18 @@ public class QuizActivity extends AppCompatActivity {
     // Hàm để hiển thị hộp thoại
     private void showMessageBox(Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Chúc mừng"); // Tiêu đề của hộp thoại
-        builder.setMessage("Bạn trả lời đúng " + countCorrectAns + "\\" + countAns +" câu hỏi" +"\ntrong thời gian " + tvTime.getText().toString()); // Nội dung của hộp thoại
+        // Dừng bộ đếm thời gian
+        onPause();
+        // Thiết lập tiêu đề và nội dung cho hộp thoại
+        builder.setTitle("GAME OVER");
+        builder.setMessage("Bạn trả lời đúng " + countCorrectAns + "\\" + countAns +" câu hỏi" +"\ntrong thời gian " + tvTime.getText().toString());
 
         // Thiết lập nút "OK"
         builder.setPositiveButton("Game mới", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 newGame();
-                handler.post(updateTimeRunnable);
+                onResume();
                 dialog.dismiss();
             }
         });
@@ -165,7 +168,7 @@ public class QuizActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
+    // Hàm để lấy các điều khiển từ giao diện
     public void getControls(){
         btnA = (Button) findViewById(R.id.bnt_a);
         btnB = (Button) findViewById(R.id.bnt_b);
@@ -177,21 +180,31 @@ public class QuizActivity extends AppCompatActivity {
         tvScore = (TextView) findViewById(R.id.tv_score);
         tvTime = (TextView) findViewById(R.id.tv_time);
     }
+    // Runnable để cập nhật thời gian
     private final Runnable updateTimeRunnable = new Runnable() {
         @Override
         public void run() {
+            // Tăng thời gian lên 1 giây
             seconds++;
+            // Kiểm tra xem thời gian đã hết chưa
             if (seconds > time) {
-                handler.removeCallbacks(updateTimeRunnable);
+                // Hiển thị hộp thoại
                 showMessageBox(QuizActivity.this);
+                handler.removeCallbacks(this); // Dừng việc gửi tin nhắn tiếp theo
+                onPause(); // Gọi onPause() nếu cần thiết
+                return; // Kết thúc runnable
             }
+            // Chuyển đổi thời gian từ giây sang phút và giây
             int minutes = (seconds % 3600) / 60;
             int secs = seconds % 60;
+            // Định dạng thời gian
             String timeString = String.format("%02d:%02d", minutes, secs);
+            // Cập nhật thời gian trên giao diện
             tvTime.setText(timeString);
             handler.postDelayed(this, 1000); // Gửi tin nhắn sau mỗi giây
         }
     };
+    // Hàm để mở hộp thoại tạm dừng
     private void  openPauseDialog() {
         final Dialog dialog = new Dialog(QuizActivity.this);
         activityView = findViewById(R.id.main);
@@ -209,14 +222,14 @@ public class QuizActivity extends AppCompatActivity {
         windowAttributes.gravity = Gravity.CENTER;
         window.setAttributes(windowAttributes);
         // Dừng bộ đếm thời gian
-        handler.removeCallbacks(updateTimeRunnable);
+        onPause();
 
         Button btnResume = dialog.findViewById(R.id.btn_resume);
         Button btnExit = dialog.findViewById(R.id.btn_exit);
 
         btnResume.setOnClickListener(v -> {
             dialog.dismiss();
-            handler.post(updateTimeRunnable);
+            onResume();
         });
 
         btnExit.setOnClickListener(v -> {
@@ -224,16 +237,18 @@ public class QuizActivity extends AppCompatActivity {
             finish();
         });
 
-        dialog.setCancelable(true);
+        dialog.setCancelable(false);
         dialog.show();
         activityView.setAlpha(0.5f);
         dialog.setOnDismissListener(dialog1 -> activityView.setAlpha(1f));
     }
+    // Hàm để cập nhật thời gian
     @Override
     protected void onResume() {
         super.onResume();
         handler.post(updateTimeRunnable); // Bắt đầu gửi tin nhắn để cập nhật thời gian
     }
+    // Hàm để dừng bộ đếm thời gian
     @Override
     protected void onPause() {
         super.onPause();
