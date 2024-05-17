@@ -39,7 +39,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_game_over" />
 
     <TextView
-        android:id="@+id/tv_time_gameover"
+        android:id="@+id/tv_time_game_over"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/alata"
@@ -56,13 +56,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="80dp"
         android:fontFamily="@font/alata"
         android:text="Score"
         android:textColor="#F88360"
         android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/tv_game_over"
-        tools:layout_editor_absoluteX="249dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_game_over" />
 
     <TextView
         android:id="@+id/tv_score_game_over"
@@ -78,7 +79,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_2" />
 
     <TextView
-        android:id="@+id/tv_total_ans"
+        android:id="@+id/tv_total_ans_game_over"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/alata"
@@ -114,12 +115,12 @@
         android:textColor="#F88360"
         android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/tv_time_gameover"
-        app:layout_constraintStart_toStartOf="@+id/tv_time_gameover"
-        app:layout_constraintTop_toBottomOf="@+id/tv_time_gameover" />
+        app:layout_constraintEnd_toEndOf="@+id/tv_time_game_over"
+        app:layout_constraintStart_toStartOf="@+id/tv_time_game_over"
+        app:layout_constraintTop_toBottomOf="@+id/tv_time_game_over" />
 
     <TextView
-        android:id="@+id/tv_accuracy"
+        android:id="@+id/tv_accuracy_game_over"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/alata"
@@ -132,7 +133,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_3" />
 
     <Button
-        android:id="@+id/btn_retry"
+        android:id="@+id/btn_retry_game_over"
         android:layout_width="120dp"
         android:layout_height="40dp"
         android:layout_marginTop="20dp"
@@ -142,12 +143,12 @@
         android:text="retry"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/tv_accuracy"
-        app:layout_constraintStart_toStartOf="@+id/tv_accuracy"
-        app:layout_constraintTop_toBottomOf="@+id/tv_accuracy" />
+        app:layout_constraintEnd_toEndOf="@+id/tv_accuracy_game_over"
+        app:layout_constraintStart_toStartOf="@+id/tv_accuracy_game_over"
+        app:layout_constraintTop_toBottomOf="@+id/tv_accuracy_game_over" />
 
     <Button
-        android:id="@+id/btn_exit"
+        android:id="@+id/btn_exit_game_over"
         android:layout_width="120dp"
         android:layout_height="40dp"
         android:layout_marginTop="20dp"
@@ -159,8 +160,8 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/tv_total_ans"
-        app:layout_constraintStart_toStartOf="@+id/tv_total_ans"
-        app:layout_constraintTop_toBottomOf="@+id/tv_total_ans"
+        app:layout_constraintEnd_toEndOf="@+id/tv_total_ans_game_over"
+        app:layout_constraintStart_toStartOf="@+id/tv_total_ans_game_over"
+        app:layout_constraintTop_toBottomOf="@+id/tv_total_ans_game_over"
         app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,7 +29,9 @@ import nguyendinhhieu_63134032.mathwhiz.activity.QuizActivity;
  */
 public class HomeFragment extends Fragment {
     private Button btnStandard;
-    private int time = 60;
+    private int time = 10;
+    //private int time = 60;
+
     private int level = 2;
     private String operation = "+-*/";
     private int countOperation = 4;
@@ -112,16 +114,20 @@ public class HomeFragment extends Fragment {
         window.setAttributes(windowAttributes);
         dialog.setCancelable(true);
         // Tìm các điều khiển trong dialog
+        // Cho phép chọn thời gian chơi
         ToggleButton tb1min = dialog.findViewById(R.id.tb_one_min);
         ToggleButton tb2min = dialog.findViewById(R.id.tb_two_min);
         ToggleButton tb3min = dialog.findViewById(R.id.tb_three_min);
+        // Cho phép chọn level
         ToggleButton tbEasy = dialog.findViewById(R.id.tb_easy);
         ToggleButton tbMedium = dialog.findViewById(R.id.tb_medium);
         ToggleButton tbHard = dialog.findViewById(R.id.tb_hard);
+        // Cho phép chọn phép toán
         ToggleButton tbAdd = dialog.findViewById(R.id.tb_add);
         ToggleButton tbMinus = dialog.findViewById(R.id.tb_minus);
         ToggleButton tbMulti = dialog.findViewById(R.id.tb_multi);
         ToggleButton tbDivide = dialog.findViewById(R.id.tb_divide);
+        // Nút bắt đầu
         Button btnStart = dialog.findViewById(R.id.btn_start);
 
         // Chọn thời gian chơi
@@ -135,13 +141,13 @@ public class HomeFragment extends Fragment {
             tb1min.setChecked(false);
             tb2min.setChecked(true);
             tb3min.setChecked(false);
-            time = 60;
+            time = 120;
         });
         tb3min.setOnClickListener(v -> {
             tb1min.setChecked(false);
             tb2min.setChecked(false);
             tb3min.setChecked(true);
-            time = 60;
+            time = 180;
 
         });
         // Chọn level
@@ -172,7 +178,9 @@ public class HomeFragment extends Fragment {
         tbDivide.setOnCheckedChangeListener(chooseOperationListener);
         // Nhấn nút bắt đầu
         btnStart.setOnClickListener(v -> {
+            // Chuyển sang màn hình chơi
             Intent intent = new Intent(getActivity(), QuizActivity.class);
+            // Truyền dữ liệu
             intent.putExtra("time", time);
             intent.putExtra("level", level);
             intent.putExtra("operation", operation);
@@ -184,6 +192,7 @@ public class HomeFragment extends Fragment {
         rootView.setAlpha(0.1f);
         dialog.setOnDismissListener(dialog1 -> rootView.setAlpha(1f));
     }
+    // Chọn phép toán
     private CompoundButton.OnCheckedChangeListener chooseOperationListener = new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
