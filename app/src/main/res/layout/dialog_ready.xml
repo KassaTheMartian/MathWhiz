@@ -1,6 +1,218 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="10dp"
+    android:paddingVertical="20dp"
+    android:paddingHorizontal="20dp"
+    android:backgroundTint="#4E596F"
+    android:background="@drawable/rounded_rectangle">
 
+    <TextView
+        android:id="@+id/tv_game_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/alata"
+        android:text="Game Time"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        android:paddingBottom="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ToggleButton
+        android:id="@+id/tb_one_min"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:checked="true"
+        android:background="@drawable/toggle_selector"
+        android:textColor="@color/text_button_color"
+        android:textOff="1 min"
+        android:textOn="1 min"
+        android:textSize="18dp"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_game_time" />
+
+
+    <ToggleButton
+        android:id="@+id/tb_two_min"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:background="@drawable/toggle_selector"
+        android:textColor="@color/text_button_color"
+        android:textOff="2 min"
+        android:textOn="2 min"
+        android:checked="false"
+        android:textSize="18dp"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toStartOf="@+id/tb_three_min"
+        app:layout_constraintStart_toEndOf="@+id/tb_one_min"
+        app:layout_constraintTop_toBottomOf="@+id/tv_game_time" />
+
+    <ToggleButton
+        android:id="@+id/tb_three_min"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:background="@drawable/toggle_selector"
+        android:textColor="@color/text_button_color"
+        android:textOff="3 min"
+        android:textOn="3 min"
+        android:checked="false"
+        android:textSize="18dp"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_game_time" />
+
+    <TextView
+        android:id="@+id/tv_play_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/alata"
+        android:paddingBottom="10dp"
+        android:text="Play Mode"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tb_one_min" />
+
+    <ToggleButton
+        android:id="@+id/tb_easy"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:checked="true"
+        android:background="@drawable/toggle_selector"
+        android:textColor="@color/text_button_color"
+        android:textOff="Easy"
+        android:textOn="Easy"
+        android:textSize="18dp"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_play_mode" />
+
+    <ToggleButton
+        android:id="@+id/tb_medium"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:background="@drawable/toggle_selector"
+        android:textColor="@color/text_button_color"
+        android:textOff="Medium"
+        android:textOn="Medium"
+        android:checked="false"
+        android:textAllCaps="false"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toStartOf="@+id/tb_hard"
+        app:layout_constraintStart_toEndOf="@+id/tb_easy"
+        app:layout_constraintTop_toBottomOf="@+id/tv_play_mode" />
+
+    <ToggleButton
+        android:id="@+id/tb_hard"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:background="@drawable/toggle_selector"
+        android:textColor="@color/text_button_color"
+        android:textOff="Hard"
+        android:textOn="Hard"
+        android:checked="false"
+        android:textAllCaps="false"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_play_mode" />
+
+    <TextView
+        android:id="@+id/tv_operations"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/alata"
+        android:paddingBottom="10dp"
+        android:text="Operations"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tb_medium" />
+
+    <ToggleButton
+        android:id="@+id/tb_add"
+        android:layout_width="70dp"
+        android:layout_height="35dp"
+        android:background="@drawable/toggle_selector"
+        android:textColor="@color/text_button_color"
+        android:checked="true"
+        android:textOff="+"
+        android:textOn="+"
+        android:textSize="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_operations" />
+
+    <ToggleButton
+        android:id="@+id/tb_minus"
+        android:layout_width="70dp"
+        android:layout_height="35dp"
+        android:background="@drawable/toggle_selector"
+        android:textColor="@color/text_button_color"
+        android:checked="true"
+        android:textOff="-"
+        android:textOn="-"
+        android:textSize="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_operations" />
+
+    <ToggleButton
+        android:id="@+id/tb_multi"
+        android:layout_width="70dp"
+        android:layout_height="35dp"
+        android:background="@drawable/toggle_selector"
+        android:textColor="@color/text_button_color"
+        android:checked="true"
+        android:textOff="*"
+        android:textOn="*"
+        android:textSize="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_operations" />
+
+    <ToggleButton
+        android:id="@+id/tb_divide"
+        android:layout_width="70dp"
+        android:layout_height="35dp"
+        android:background="@drawable/toggle_selector"
+        android:textColor="@color/text_button_color"
+        android:checked="true"
+        android:textOff="/"
+        android:textOn="/"
+        android:textSize="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_operations" />
+
+    <Button
+        android:id="@+id/btn_start"
+        android:layout_width="230dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/rounded_rectangle"
+        android:fontFamily="@font/alata"
+        android:text="START GAME"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tb_add" />
 </androidx.constraintlayout.widget.ConstraintLayout>

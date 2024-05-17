@@ -13,18 +13,18 @@
         android:id="@+id/frm_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:background="#191717"
         android:paddingTop="5dp"
-        app:menu="@menu/menu_bottom"
         app:itemIconSize="42dp"
-        app:labelVisibilityMode="unlabeled"
-        app:itemRippleColor="#191727"
         app:itemIconTint="@color/bottom_nav_icon_color"
-    />
+        app:itemRippleColor="#191727"
+        app:labelVisibilityMode="unlabeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_bottom" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,7 +25,7 @@ public class Quiz {
         // Thêm n-1 phép toán và số kèm theo
         for (int i = 0; i < n - 1; i++) {
             // Chọn ngẫu nhiên một toán tử từ +, -, *
-            char operator = phepToan.charAt(rand.nextInt(4));
+            char operator = phepToan.charAt(rand.nextInt(phepToan.length()));
             // Thêm toán tử vào chuỗi
             builder.append(" ").append(operator).append(" ");
             // Thêm số tiếp theo vào chuỗi
