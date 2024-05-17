@@ -29,6 +29,8 @@ import nguyendinhhieu_63134032.mathwhiz.activity.QuizActivity;
  */
 public class HomeFragment extends Fragment {
     private Button btnStandard;
+    private Button btnEndless;
+    private Button btnHardcore;
     private int time = 10;
     //private int time = 60;
 
@@ -85,9 +87,18 @@ public class HomeFragment extends Fragment {
 
         // Khởi tạo Button
         btnStandard = view.findViewById(R.id.btn_standard);
+        btnEndless = view.findViewById(R.id.btn_endless);
+        btnHardcore = view.findViewById(R.id.btn_hard);
+
+        // Sự kiện khi nhấn vào Button
         btnStandard.setOnClickListener(v -> {
             openStandardDialog();
-
+        });
+        btnEndless.setOnClickListener(v -> {
+            Toast.makeText(getContext(), "Coming soon", Toast.LENGTH_SHORT).show();
+        });
+        btnHardcore.setOnClickListener(v -> {
+            Toast.makeText(getContext(), "Coming soon", Toast.LENGTH_SHORT).show();
         });
         return view;
     }
