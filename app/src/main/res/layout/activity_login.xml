@@ -19,10 +19,21 @@
         android:textColor="@color/white"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/et_username"
-        app:layout_constraintStart_toStartOf="@+id/et_username"
-        app:layout_constraintTop_toBottomOf="@+id/et_username" />
+        app:layout_constraintEnd_toEndOf="@+id/et_password"
+        app:layout_constraintStart_toStartOf="@+id/et_password"
+        app:layout_constraintTop_toBottomOf="@+id/et_password" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/alata"
+        android:text="Don't have an account?"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_register"
+        app:layout_constraintEnd_toEndOf="@+id/btn_register"
+        app:layout_constraintStart_toStartOf="@+id/btn_register" />
     <Button
         android:id="@+id/btn_register"
         android:layout_width="300dp"
@@ -57,17 +68,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/et_password"
+        android:id="@+id/et_username"
         android:layout_width="300dp"
         android:layout_height="70dp"
         android:layout_marginTop="65dp"
         android:background="@drawable/hollow_rounded_rectangle"
         android:drawableEnd="@drawable/small_user"
-        android:paddingHorizontal="20dp"
         android:drawableTint="#F88360"
         android:fontFamily="@font/alata"
-        android:inputType="text"
         android:hint="Username"
+        android:inputType="text"
+        android:paddingHorizontal="20dp"
+        android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="@+id/tv_login"
@@ -76,7 +88,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_login" />
 
     <EditText
-        android:id="@+id/et_username"
+        android:id="@+id/et_password"
         android:layout_width="300dp"
         android:layout_height="70dp"
         android:layout_marginTop="20dp"
@@ -87,11 +99,12 @@
         android:hint="Password"
         android:inputType="textPassword"
         android:paddingHorizontal="20dp"
+        android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="@+id/et_password"
+        app:layout_constraintEnd_toEndOf="@+id/et_username"
         app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="@+id/et_password"
-        app:layout_constraintTop_toBottomOf="@+id/et_password" />
+        app:layout_constraintStart_toStartOf="@+id/et_username"
+        app:layout_constraintTop_toBottomOf="@+id/et_username" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
