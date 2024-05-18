@@ -24,6 +24,7 @@ import nguyendinhhieu_63134032.mathwhiz.R;
 import nguyendinhhieu_63134032.mathwhiz.model.User;
 
 public class LoginActivity extends AppCompatActivity {
+    static String CURRENT_USER = "";
     private EditText edtUsername;
     private EditText edtPassword;
     private Button btnLogin;
@@ -55,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
         String password = edtPassword.getText().toString();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference usersRef = database.getReference("users").child(username);
-        Log.w("LoginActivity", "Username: " + username + ", Password: " + password);
 
         usersRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -65,29 +65,23 @@ public class LoginActivity extends AppCompatActivity {
                     if (user != null) {
                         // Xác thực mật khẩu
                         if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                            // Đăng nhập thành công
-                            Log.d("LoginActivity", "Đăng nhập thành công bằng username.");
-                            Toast.makeText(LoginActivity.this, "Đăng nhập thành công.", Toast.LENGTH_SHORT).show();
-                            // Chuyển sang activity tiếp theo
+                            // Đăng nhập thành công chuyển sang activity tiếp theo
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            CURRENT_USER = username;
                             finish(); // Kết thúc activity hiện tại
                         } else {
                             // Mật khẩu không trùng khớp
-                            Log.w("LoginActivity", "Mật khẩu không chính xác.");
                             Toast.makeText(LoginActivity.this, "Mật khẩu không chính xác. Vui lòng thử lại.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 } else {
                     // Username không tồn tại
-                    Log.w("LoginActivity", "Username không tồn tại.");
                     Toast.makeText(LoginActivity.this, "Username không tồn tại. Vui lòng thử lại.", Toast.LENGTH_SHORT).show();
 
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("LoginActivity", "Lỗi khi truy vấn dữ liệu từ Firebase: " + error.getMessage());
                 Toast.makeText(LoginActivity.this, "Lỗi khi truy vấn dữ liệu từ Firebase", Toast.LENGTH_SHORT).show();
             }
         });

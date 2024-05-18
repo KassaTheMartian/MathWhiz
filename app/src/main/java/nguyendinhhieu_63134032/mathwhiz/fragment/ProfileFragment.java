@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import nguyendinhhieu_63134032.mathwhiz.R;
 
@@ -16,6 +17,7 @@ import nguyendinhhieu_63134032.mathwhiz.R;
  * create an instance of this fragment.
  */
 public class ProfileFragment extends Fragment {
+    TextView tv;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +63,8 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        tv = view.findViewById(R.id.textView11);
+        tv.setText("Hello");
         return view;
     }
 }

@@ -14,6 +14,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,14 +22,20 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
 import nguyendinhhieu_63134032.mathwhiz.R;
+import nguyendinhhieu_63134032.mathwhiz.model.GameHistory;
 import nguyendinhhieu_63134032.mathwhiz.model.Quiz;
 
 public class QuizActivity extends AppCompatActivity {
@@ -272,26 +279,59 @@ public class QuizActivity extends AppCompatActivity {
         TextView tvAccuracy = dialog.findViewById(R.id.tv_accuracy_game_over);
         TextView tvTotalAns = dialog.findViewById(R.id.tv_total_ans_game_over);
 
+        double accuracy = roundToTwoDecimalPlaces((double) countCorrectAns / countAns * 100);
+        Date date = new Date();
+        String stringDate = new SimpleDateFormat("dd-MM-yy HH:mm a").format(date);
+
+
         tvScore.setText(String.valueOf(countCorrectAns));
         tvTimeGameOver.setText(tvTime.getText().toString());
-        tvAccuracy.setText(roundToTwoDecimalPlaces((double) countCorrectAns / countAns * 100) + "%");
+        tvAccuracy.setText(accuracy + "%");
         tvTotalAns.setText(String.valueOf(countAns));
         btnNewGame.setOnClickListener(v -> {
+            // Lưu lịch sử chơi
+            GameHistory gameHistory = new GameHistory(countCorrectAns, countAns, time, accuracy,stringDate, String.valueOf(level), operator);
+            addGameHistory("kassa",gameHistory);
             dialog.dismiss();
             newGame();
             onResume();
         });
 
         btnExit.setOnClickListener(v -> {
+            // Lưu lịch sử chơi
+            GameHistory gameHistory = new GameHistory(countCorrectAns, countAns, time, accuracy,stringDate, String.valueOf(level), operator);
+            addGameHistory("kassa",gameHistory);
             dialog.dismiss();
             finish();
         });
+
+
+
+
 
         dialog.setCancelable(false);
         dialog.show();
         activityView.setAlpha(0.5f);
         dialog.setOnDismissListener(dialog1 -> activityView.setAlpha(1f));
     }
+
+
+    private void addGameHistory(String username, GameHistory gameHistory) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference usersRef = database.getReference("users").child(username).child("history");
+        DatabaseReference newHistoryRef = usersRef.push();
+        String gameSessionId = newHistoryRef.getKey();
+        usersRef.child(gameSessionId).setValue(gameHistory)
+                .addOnSuccessListener(aVoid -> {
+                    Log.d("AddGameHistory", "Game history added successfully");
+                    Toast.makeText(this, "Game history added successfully", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Log.w("AddGameHistory", "Error adding game history", e);
+                    Toast.makeText(this, "Error adding game history", Toast.LENGTH_SHORT).show();
+                });
+    }
+
     // Hàm để bắt đầu bộ đếm thời gian
     @Override
     protected void onResume() {
