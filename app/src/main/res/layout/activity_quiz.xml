@@ -43,7 +43,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_score"
+            android:id="@+id/tv_item_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -65,9 +65,9 @@
             android:layout_marginTop="5dp"
             android:background="@drawable/pause2"
             android:backgroundTint="#F88360"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_score"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_item_score"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_score" />
+            app:layout_constraintTop_toTopOf="@+id/tv_item_score" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

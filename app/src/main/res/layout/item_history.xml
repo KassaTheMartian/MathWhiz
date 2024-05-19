@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_rectangle"
+    android:backgroundTint="#191717"
+    android:layout_marginHorizontal="10dp"
+    android:paddingLeft="10dp"
+    android:paddingVertical="10dp"
+    android:layout_marginVertical="7dp">
+
+    <TextView
+        android:id="@+id/tv_item_level"
+        android:layout_width="135dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="-10dp"
+        android:fontFamily="@font/alata"
+        android:gravity="center"
+        android:text="MEDIUM"
+        android:textColor="#FFEE5B"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_item_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/alata"
+        android:text="Score: 100"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_item_operations"
+        app:layout_constraintStart_toEndOf="@+id/tv_item_level"
+        app:layout_constraintTop_toTopOf="@+id/tv_item_level"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tv_item_play_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:fontFamily="@font/alata"
+        android:text="Time: 1 min"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_item_operations"
+        app:layout_constraintStart_toEndOf="@+id/tv_item_score"
+        app:layout_constraintTop_toTopOf="@+id/tv_item_level"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tv_item_operations"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-15dp"
+        android:fontFamily="@font/alata"
+        android:text="+-*/"
+        android:textColor="#FFEE5B"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_item_level"
+        app:layout_constraintStart_toStartOf="@+id/tv_item_level"
+        app:layout_constraintTop_toBottomOf="@+id/tv_item_level" />
+
+    <TextView
+        android:id="@+id/tv_item_accuracy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/alata"
+        android:text="Accuracy: 100%"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_item_operations"
+        app:layout_constraintStart_toEndOf="@+id/tv_item_level"
+        app:layout_constraintTop_toTopOf="@+id/tv_item_level" />
+
+    <TextView
+        android:id="@+id/tv_item_timestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/alata"
+        android:text="08/02/2024"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_item_operations"
+        app:layout_constraintStart_toEndOf="@+id/tv_item_level"
+        app:layout_constraintTop_toTopOf="@+id/tv_item_level"
+        app:layout_constraintVertical_bias="1.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

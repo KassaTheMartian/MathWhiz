@@ -14,7 +14,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,9 +29,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
@@ -192,7 +189,7 @@ public class QuizActivity extends AppCompatActivity {
         btnPause = (ImageButton) findViewById(R.id.btn_pause);
 
         tvQuestion = (TextView) findViewById(R.id.tv_de);
-        tvScore = (TextView) findViewById(R.id.tv_score);
+        tvScore = (TextView) findViewById(R.id.tv_item_score);
         tvTime = (TextView) findViewById(R.id.tv_time);
     }
     // Runnable để cập nhật thời gian
@@ -297,8 +294,8 @@ public class QuizActivity extends AppCompatActivity {
             GameHistory gameHistory = new GameHistory(countCorrectAns, countAns, time, accuracy,stringDate, String.valueOf(level), operator);
             addGameHistory(currentUser,gameHistory);
             dialog.dismiss();
-            newGame();
             onResume();
+            newGame();
         });
 
         btnExit.setOnClickListener(v -> {
@@ -321,7 +318,14 @@ public class QuizActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference usersRef = database.getReference("users").child(username).child("history");
         // Tạo một khóa ngẫu nhiên
+
         String historyId = usersRef.push().getKey();
+        // Tạo đối tượng HashMap
+
+//        HashMap<String, Object> item = new HashMap<>();
+//        item.put(historyId, gameHistory.toFirebaseObject());
+//
+//        usersRef.updateChildren(item);
         // Thêm lịch sử chơi vào Firebase
         if (historyId != null)
             usersRef.child(historyId).setValue(gameHistory);

@@ -9,7 +9,7 @@
     tools:context=".activity.MainActivity">
     <androidx.fragment.app.FragmentContainerView
         android:background="#2C2D3A"
-        android:paddingBottom="40dp"
+        android:paddingBottom="0dp"
         android:id="@+id/frm_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

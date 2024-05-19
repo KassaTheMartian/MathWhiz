@@ -1,9 +1,11 @@
 package nguyendinhhieu_63134032.mathwhiz.model;
 
+import java.util.HashMap;
+
 public class GameHistory {
-    private long score;
-    private long questionsAnswered;
-    private long playTime;
+    private int score;
+    private int questionsAnswered;
+    private int playTime;
     private double accuracy;
     private String timestamp;
     private String difficulty;
@@ -12,7 +14,7 @@ public class GameHistory {
     public GameHistory() {
         // Default constructor required for calls to DataSnapshot.getValue(GameHistory.class)
     }
-    public GameHistory(long score, long questionsAnswered, long playTime, double accuracy, String timestamp, String difficulty, String operator) {
+    public GameHistory(int score, int questionsAnswered, int playTime, double accuracy, String timestamp, String difficulty, String operator) {
         this.score = score;
         this.questionsAnswered = questionsAnswered;
         this.playTime = playTime;
@@ -21,12 +23,23 @@ public class GameHistory {
         this.difficulty = difficulty;
         this.operator = operator;
     }
+    public HashMap<String, Object> toFirebaseObject(){
+        HashMap<String, Object> gameHistoryObject = new HashMap<>();
+        gameHistoryObject.put("score", score);
+        gameHistoryObject.put("questionsAnswered", questionsAnswered);
+        gameHistoryObject.put("playTime", playTime);
+        gameHistoryObject.put("accuracy", accuracy);
+        gameHistoryObject.put("timestamp", timestamp);
+        gameHistoryObject.put("difficulty", difficulty);
+        gameHistoryObject.put("operator", operator);
+        return gameHistoryObject;
+    }
 
     public long getScore() {
         return score;
     }
 
-    public void setScore(long score) {
+    public void setScore(int score) {
         this.score = score;
     }
 
@@ -34,7 +47,7 @@ public class GameHistory {
         return questionsAnswered;
     }
 
-    public void setQuestionsAnswered(long questionsAnswered) {
+    public void setQuestionsAnswered(int questionsAnswered) {
         this.questionsAnswered = questionsAnswered;
     }
 
@@ -42,7 +55,7 @@ public class GameHistory {
         return playTime;
     }
 
-    public void setPlayTime(long playTime) {
+    public void setPlayTime(int playTime) {
         this.playTime = playTime;
     }
 

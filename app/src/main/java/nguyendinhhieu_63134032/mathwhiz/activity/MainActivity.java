@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.frm_layout, fragment)
+                .addToBackStack(null) // Thêm dòng này để khi ấn nút back sẽ quay về fragment trước đó
                 .commit();
     }
 }
