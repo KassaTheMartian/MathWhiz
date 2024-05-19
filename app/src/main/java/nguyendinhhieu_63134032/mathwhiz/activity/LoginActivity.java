@@ -52,36 +52,47 @@ public class LoginActivity extends AppCompatActivity {
     public void login() {
         String username = edtUsername.getText().toString();
         String password = edtPassword.getText().toString();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference usersRef = database.getReference("users").child(username);
 
-        usersRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    User user = dataSnapshot.getValue(User.class);
-                    if (user != null) {
-                        // Xác thực mật khẩu
-                        if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                            // Đăng nhập thành công chuyển sang activity tiếp theo
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            intent.putExtra("currentUser", user.getUsername());
-                            startActivity(intent);
-                            finish(); // Kết thúc activity hiện tại
-                        } else {
-                            // Mật khẩu không trùng khớp
-                            Toast.makeText(LoginActivity.this, "Mật khẩu không chính xác. Vui lòng thử lại.", Toast.LENGTH_SHORT).show();
+        boolean isEmptyUsername = username == null || username.isEmpty();
+        boolean isEmptyPassword = password == null || password.isEmpty();
+
+        if (isEmptyUsername || isEmptyPassword) {
+            // Username or password is empty
+            Toast.makeText(this, "Username and password cannot be empty", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference usersRef = database.getReference("users").child(username);
+            usersRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        User user = dataSnapshot.getValue(User.class);
+                        if (user != null) {
+                            // Xác thực mật khẩu
+                            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                                // Đăng nhập thành công chuyển sang activity tiếp theo
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.putExtra("currentUser", user.getUsername());
+                                startActivity(intent);
+                                finish(); // Kết thúc activity hiện tại
+                            } else {
+                                // Mật khẩu không trùng khớp
+                                Toast.makeText(LoginActivity.this, "Mật khẩu không chính xác. Vui lòng thử lại.", Toast.LENGTH_SHORT).show();
+                            }
                         }
+                    } else {
+                        // Username không tồn tại
+                        Toast.makeText(LoginActivity.this, "Username không tồn tại. Vui lòng thử lại.", Toast.LENGTH_SHORT).show();
                     }
-                } else {
-                    // Username không tồn tại
-                    Toast.makeText(LoginActivity.this, "Username không tồn tại. Vui lòng thử lại.", Toast.LENGTH_SHORT).show();
                 }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(LoginActivity.this, "Lỗi khi truy vấn dữ liệu từ Firebase", Toast.LENGTH_SHORT).show();
-            }
-        });
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(LoginActivity.this, "Lỗi khi truy vấn dữ liệu từ Firebase", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+        }
     }
 }
