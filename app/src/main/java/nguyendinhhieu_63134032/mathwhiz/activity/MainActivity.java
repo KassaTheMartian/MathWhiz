@@ -4,6 +4,7 @@ import nguyendinhhieu_63134032.mathwhiz.fragment.HomeFragment;
 import nguyendinhhieu_63134032.mathwhiz.fragment.HistoryFragment;
 import nguyendinhhieu_63134032.mathwhiz.fragment.ProfileFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -32,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         });
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         //binding.bottomNavigationView.setBackground(null);
 
         replaceFragment(new HomeFragment());

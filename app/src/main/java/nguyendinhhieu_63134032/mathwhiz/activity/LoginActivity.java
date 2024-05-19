@@ -2,7 +2,6 @@ package nguyendinhhieu_63134032.mathwhiz.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -24,7 +23,6 @@ import nguyendinhhieu_63134032.mathwhiz.R;
 import nguyendinhhieu_63134032.mathwhiz.model.User;
 
 public class LoginActivity extends AppCompatActivity {
-    static String CURRENT_USER = "";
     private EditText edtUsername;
     private EditText edtPassword;
     private Button btnLogin;
@@ -66,8 +64,9 @@ public class LoginActivity extends AppCompatActivity {
                         // Xác thực mật khẩu
                         if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
                             // Đăng nhập thành công chuyển sang activity tiếp theo
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                            CURRENT_USER = username;
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            intent.putExtra("currentUser", user.getUsername());
+                            startActivity(intent);
                             finish(); // Kết thúc activity hiện tại
                         } else {
                             // Mật khẩu không trùng khớp
@@ -77,7 +76,6 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     // Username không tồn tại
                     Toast.makeText(LoginActivity.this, "Username không tồn tại. Vui lòng thử lại.", Toast.LENGTH_SHORT).show();
-
                 }
             }
             @Override

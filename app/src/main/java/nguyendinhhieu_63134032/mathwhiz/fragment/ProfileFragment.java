@@ -1,5 +1,6 @@
 package nguyendinhhieu_63134032.mathwhiz.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,8 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import nguyendinhhieu_63134032.mathwhiz.R;
+import nguyendinhhieu_63134032.mathwhiz.model.User;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,6 +26,7 @@ import nguyendinhhieu_63134032.mathwhiz.R;
  * create an instance of this fragment.
  */
 public class ProfileFragment extends Fragment {
+    User currentUser;
     TextView tv;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -58,13 +68,41 @@ public class ProfileFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        Intent intent = getActivity().getIntent();
+        String username = intent.getStringExtra("currentUser");
+
+        // Lấy thông tin user từ database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference usersRef = database.getReference("users").child(username);
+        usersRef.addValueEventListener(valueEventListener);
         tv = view.findViewById(R.id.textView11);
-        tv.setText("Hello");
         return view;
     }
+    private void initViews() {
+        tv = getView().findViewById(R.id.textView11);
+    }
+
+    ValueEventListener valueEventListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            if (dataSnapshot.exists()) {
+                currentUser = dataSnapshot.getValue(User.class);
+                if (currentUser != null) {
+                    tv.setText(currentUser.getFullname());  // Cập nhật TextView với thông tin người dùng
+                }
+            } else {
+                // Username không tồn tại
+                Toast.makeText(getContext(), "Lỗi không tìm ra DataSnapshot", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+            Toast.makeText(getContext(), "Lỗi kết nối", Toast.LENGTH_SHORT).show();
+        }
+    };
 }

@@ -31,6 +31,7 @@ public class HomeFragment extends Fragment {
     private Button btnStandard;
     private Button btnEndless;
     private Button btnHardcore;
+    private String currentUser;
     private int time = 10;
     //private int time = 60;
 
@@ -84,6 +85,9 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        Intent intent = getActivity().getIntent();
+        currentUser = intent.getStringExtra("currentUser");
 
         // Khởi tạo Button
         btnStandard = view.findViewById(R.id.btn_standard);
@@ -195,6 +199,7 @@ public class HomeFragment extends Fragment {
             intent.putExtra("time", time);
             intent.putExtra("level", level);
             intent.putExtra("operation", operation);
+            intent.putExtra("currentUser", currentUser);
             startActivity(intent);
             dialog.dismiss();
         });

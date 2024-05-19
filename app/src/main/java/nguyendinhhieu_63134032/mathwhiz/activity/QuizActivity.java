@@ -30,7 +30,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
@@ -61,6 +63,7 @@ public class QuizActivity extends AppCompatActivity {
     private TextView tvTime;
     private View activityView;
     private final Handler handler = new Handler();
+    String currentUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +78,7 @@ public class QuizActivity extends AppCompatActivity {
         level = intent.getIntExtra("level",3);
         time = intent.getIntExtra("time", 60);
         operator = intent.getStringExtra("operation");
+        currentUser = intent.getStringExtra("currentUser");
         getControls();
         newGame();
         btnA.setOnClickListener(v -> chooseAns(btnA));
@@ -291,7 +295,7 @@ public class QuizActivity extends AppCompatActivity {
         btnNewGame.setOnClickListener(v -> {
             // Lưu lịch sử chơi
             GameHistory gameHistory = new GameHistory(countCorrectAns, countAns, time, accuracy,stringDate, String.valueOf(level), operator);
-            addGameHistory("kassa",gameHistory);
+            addGameHistory(currentUser,gameHistory);
             dialog.dismiss();
             newGame();
             onResume();
@@ -300,13 +304,10 @@ public class QuizActivity extends AppCompatActivity {
         btnExit.setOnClickListener(v -> {
             // Lưu lịch sử chơi
             GameHistory gameHistory = new GameHistory(countCorrectAns, countAns, time, accuracy,stringDate, String.valueOf(level), operator);
-            addGameHistory("kassa",gameHistory);
+            addGameHistory(currentUser,gameHistory);
             dialog.dismiss();
             finish();
         });
-
-
-
 
 
         dialog.setCancelable(false);
@@ -315,23 +316,16 @@ public class QuizActivity extends AppCompatActivity {
         dialog.setOnDismissListener(dialog1 -> activityView.setAlpha(1f));
     }
 
-
+    // Lưu lịch sử chơi vào Firebase
     private void addGameHistory(String username, GameHistory gameHistory) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference usersRef = database.getReference("users").child(username).child("history");
-        DatabaseReference newHistoryRef = usersRef.push();
-        String gameSessionId = newHistoryRef.getKey();
-        usersRef.child(gameSessionId).setValue(gameHistory)
-                .addOnSuccessListener(aVoid -> {
-                    Log.d("AddGameHistory", "Game history added successfully");
-                    Toast.makeText(this, "Game history added successfully", Toast.LENGTH_SHORT).show();
-                })
-                .addOnFailureListener(e -> {
-                    Log.w("AddGameHistory", "Error adding game history", e);
-                    Toast.makeText(this, "Error adding game history", Toast.LENGTH_SHORT).show();
-                });
+        // Tạo một khóa ngẫu nhiên
+        String historyId = usersRef.push().getKey();
+        // Thêm lịch sử chơi vào Firebase
+        if (historyId != null)
+            usersRef.child(historyId).setValue(gameHistory);
     }
-
     // Hàm để bắt đầu bộ đếm thời gian
     @Override
     protected void onResume() {
