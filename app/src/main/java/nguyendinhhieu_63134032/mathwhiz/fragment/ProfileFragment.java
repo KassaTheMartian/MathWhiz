@@ -1,23 +1,36 @@
 package nguyendinhhieu_63134032.mathwhiz.fragment;
 
+import static nguyendinhhieu_63134032.mathwhiz.activity.QuizActivity.roundToTwoDecimalPlaces;
+
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
+import java.util.Objects;
+
 import nguyendinhhieu_63134032.mathwhiz.R;
+import nguyendinhhieu_63134032.mathwhiz.activity.LoginActivity;
 import nguyendinhhieu_63134032.mathwhiz.model.User;
 
 /**
@@ -26,8 +39,16 @@ import nguyendinhhieu_63134032.mathwhiz.model.User;
  * create an instance of this fragment.
  */
 public class ProfileFragment extends Fragment {
-    User currentUser;
-    TextView tv;
+    private User currentUser;
+    private TextView tvUsername;
+    private TextView tvFullname;
+    private TextView tvTotalScore;
+    private TextView tvTotalTime;
+    private TextView tvAverageAccuracy;
+    private TextView tvTotalGame;
+
+    private ImageButton btnLogout;
+    private ImageView imgAvatar;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -74,35 +95,92 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         Intent intent = getActivity().getIntent();
         String username = intent.getStringExtra("currentUser");
-
+        // Tiến hành khởi tạo các view
+        initViews(view);
+        btnLogout.setOnClickListener(v -> logout());
         // Lấy thông tin user từ database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference usersRef = database.getReference("users").child(username);
-        usersRef.addValueEventListener(valueEventListener);
-        tv = view.findViewById(R.id.textView11);
+        // Lấy thông tin user từ database
+        database.getReference().child("users").child(username).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    currentUser = dataSnapshot.getValue(User.class);
+                    if (currentUser != null) {
+                        tvFullname.setText(currentUser.getFullname());
+                        tvUsername.setText("@" + currentUser.getUsername());
+                    }
+                } else {
+                    // Username không tồn tại
+                    Toast.makeText(getContext(), "Lỗi không tìm ra DataSnapshot", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getContext(), "Lỗi kết nối", Toast.LENGTH_SHORT).show();
+            }
+        });
+        // Lấy thông tin thống kê lịch sử chơi game
+        database.getReference().child("users").child(username).child("history").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // Tính toán thông tin thống kê
+                int totalScore = 0;
+                int totalTime = 0;
+                int totalGame = 0;
+                int totalAnswer = 0;
+                double averageAccuracy = 0;
+                // Lấy thông tin từ database
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    totalScore += Integer.parseInt(Objects.requireNonNull(snapshot.child("score").getValue()).toString());
+                    totalTime += Integer.parseInt(Objects.requireNonNull(snapshot.child("playTime").getValue()).toString());
+                    totalAnswer += Integer.parseInt(Objects.requireNonNull(snapshot.child("questionsAnswered").getValue()).toString());
+                    totalGame++;
+                }
+                averageAccuracy = roundToTwoDecimalPlaces((double) totalScore / totalAnswer * 100);
+
+                // Hiển thị thông tin thống kê
+                tvTotalScore.setText(String.valueOf(totalScore));
+                tvTotalGame.setText(String.valueOf(totalGame));
+                tvAverageAccuracy.setText(averageAccuracy + "%");
+                tvTotalTime.setText((roundToTwoDecimalPlaces((double) totalTime / 60)) + " min");
+
+                Log.e("totalScore", String.valueOf(totalScore));
+                Log.e("totalAnswer", String.valueOf(totalAnswer));
+                Log.e("averageAccuracy", String.valueOf(averageAccuracy));
+                Log.e("totalGame", String.valueOf(totalGame));
+                Log.e("totalTime", String.valueOf(totalTime));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getContext(), "Lỗi kết nối", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Glide.with(this)
+                .load(R.drawable.avt)
+                .transform(new CircleCrop())
+                .into(imgAvatar);
+
         return view;
     }
-    private void initViews() {
-        tv = getView().findViewById(R.id.textView11);
+    // Khởi tạo các view
+    private void initViews(View v) {
+        tvUsername = v.findViewById(R.id.tv_username_profile);
+        tvFullname = v.findViewById(R.id.tv_fullname_profile);
+        tvAverageAccuracy = v.findViewById(R.id.tv_avg_accuracy);
+        tvTotalScore = v.findViewById(R.id.tv_total_score);
+        tvTotalTime = v.findViewById(R.id.tv_total_time);
+        tvTotalGame = v.findViewById(R.id.tv_total_game);
+        btnLogout = v.findViewById(R.id.btn_logout);
+        imgAvatar = v.findViewById(R.id.iv_avatar);
     }
 
-    ValueEventListener valueEventListener = new ValueEventListener() {
-        @Override
-        public void onDataChange(DataSnapshot dataSnapshot) {
-            if (dataSnapshot.exists()) {
-                currentUser = dataSnapshot.getValue(User.class);
-                if (currentUser != null) {
-                    tv.setText(currentUser.getFullname());  // Cập nhật TextView với thông tin người dùng
-                }
-            } else {
-                // Username không tồn tại
-                Toast.makeText(getContext(), "Lỗi không tìm ra DataSnapshot", Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        @Override
-        public void onCancelled(DatabaseError databaseError) {
-            Toast.makeText(getContext(), "Lỗi kết nối", Toast.LENGTH_SHORT).show();
-        }
-    };
+    private void logout() {
+        Intent intent = new Intent(getContext(), LoginActivity.class);
+        startActivity(intent);
+        getActivity().finish();
+    }
 }

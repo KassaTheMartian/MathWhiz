@@ -9,20 +9,173 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingHorizontal="15dp"
+        android:paddingTop="30dp">
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/tv_username_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="hehehehe"
+            android:fontFamily="@font/alata"
+            android:hint="hieudeptrai"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btn_logout"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_logout"
+            android:backgroundTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_username_profile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_username_profile"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <ImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/avt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_username_profile" />
+
+        <TextView
+            android:id="@+id/tv_fullname_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alata"
+            android:gravity="center"
+            android:hint="Nguyễn Đình Hiệu"
+            android:textColorHint="@color/white"
             android:textColor="@color/white"
             android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/iv_avatar"
+            app:layout_constraintStart_toStartOf="@+id/iv_avatar"
+            app:layout_constraintTop_toBottomOf="@+id/iv_avatar" />
+
+        <TextView
+            android:id="@+id/tv_profile_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/alata"
+            android:gravity="center"
+            android:text="Total game"
+            android:textColor="@color/white"
+            android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.164"
+            app:layout_constraintHorizontal_bias="0.125"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.079" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_fullname_profile" />
+
+        <TextView
+            android:id="@+id/tv_total_game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alata"
+            android:gravity="center"
+            android:hint="20"
+            android:textColorHint="#FFD700"
+            android:textColor="#FFD700"
+            android:textSize="35sp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_profile_1"
+            app:layout_constraintStart_toStartOf="@+id/tv_profile_1"
+            app:layout_constraintTop_toBottomOf="@+id/tv_profile_1" />
+
+        <TextView
+            android:id="@+id/tv_profile_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/alata"
+            android:gravity="center"
+            android:text="Total score"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.875"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_fullname_profile" />
+
+        <TextView
+            android:id="@+id/tv_total_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alata"
+            android:gravity="center"
+            android:hint="1000"
+            android:textColorHint="#FFD700"
+            android:textColor="#FFD700"
+            android:textSize="35sp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_profile_2"
+            app:layout_constraintStart_toStartOf="@+id/tv_profile_2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_profile_2" />
+
+        <TextView
+            android:id="@+id/tv_profile_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/alata"
+            android:gravity="center"
+            android:text="Accuracy"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_profile_1"
+            app:layout_constraintStart_toStartOf="@+id/tv_profile_1"
+            app:layout_constraintTop_toBottomOf="@+id/tv_total_game" />
+
+        <TextView
+            android:id="@+id/tv_avg_accuracy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alata"
+            android:gravity="center"
+            android:hint="47.47%"
+            android:textColorHint="#FFD700"
+            android:textColor="#FFD700"
+            android:textSize="35sp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_profile_3"
+            app:layout_constraintHorizontal_bias="0.505"
+            app:layout_constraintStart_toStartOf="@+id/tv_profile_3"
+            app:layout_constraintTop_toBottomOf="@+id/tv_profile_3" />
+
+        <TextView
+            android:id="@+id/tv_profile_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/alata"
+            android:gravity="center"
+            android:text="Total time"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_profile_2"
+            app:layout_constraintStart_toStartOf="@+id/tv_profile_2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_total_score" />
+
+        <TextView
+            android:id="@+id/tv_total_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alata"
+            android:gravity="center"
+            android:hint="120 min"
+            android:textColorHint="#FFD700"
+            android:textColor="#FFD700"
+            android:textSize="35sp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_profile_4"
+            app:layout_constraintHorizontal_bias="0.505"
+            app:layout_constraintStart_toStartOf="@+id/tv_profile_4"
+            app:layout_constraintTop_toBottomOf="@+id/tv_profile_3" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

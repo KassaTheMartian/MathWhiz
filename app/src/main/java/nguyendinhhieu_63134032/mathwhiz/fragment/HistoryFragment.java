@@ -1,5 +1,6 @@
 package nguyendinhhieu_63134032.mathwhiz.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -33,6 +34,7 @@ import nguyendinhhieu_63134032.mathwhiz.model.GameHistory;
 public class HistoryFragment extends Fragment {
     ArrayList<GameHistory> listGameHistory;
     GameHistoryAdapter adapter;
+    private String currentUser;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -79,9 +81,13 @@ public class HistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_history, container, false);
 
+        Intent intent = getActivity().getIntent();
+        currentUser = intent.getStringExtra("currentUser");
+
+
         listGameHistory = new ArrayList<>();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = database.getReference("users").child("kassa").child("history");
+        DatabaseReference databaseReference = database.getReference("users").child(currentUser).child("history");
         databaseReference.addValueEventListener(valueEventListener);
 
         RecyclerView recyclerView = view.findViewById(R.id.rv_history);

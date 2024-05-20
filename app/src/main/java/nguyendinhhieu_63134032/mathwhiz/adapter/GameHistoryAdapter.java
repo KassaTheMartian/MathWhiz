@@ -73,12 +73,12 @@ public class GameHistoryAdapter extends RecyclerView.Adapter{
                 break;
             case "4":
                 viewHolder.tvLevel.setText("Hard");
-                viewHolder.tvLevel.setTextColor(Color.parseColor("#D80808")); // Green for Easy
-                viewHolder.tvOperator.setTextColor(Color.parseColor("#D80808")); // Green for Easy
+                viewHolder.tvLevel.setTextColor(Color.parseColor("#FAAB36")); // Green for Easy
+                viewHolder.tvOperator.setTextColor(Color.parseColor("#FAAB36")); // Green for Easy
                 break;
         }
         viewHolder.tvScore.setText("Score: " + gameHistory.getScore());
-        viewHolder.tvPlayTime.setText("Time: "+ gameHistory.getPlayTime() +" min");
+        viewHolder.tvPlayTime.setText("Time: "+ (gameHistory.getPlayTime()/60) +" min");
         viewHolder.tvTimeStamp.setText(gameHistory.getTimestamp());
         viewHolder.tvOperator.setText(gameHistory.getOperator());
         viewHolder.tvAccuracy.setText("Accuracy: " + gameHistory.getAccuracy() + "%");
