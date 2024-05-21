@@ -46,6 +46,7 @@ public class ProfileFragment extends Fragment {
     private TextView tvTotalTime;
     private TextView tvAverageAccuracy;
     private TextView tvTotalGame;
+    private TextView tvTotalAnswer;
 
     private ImageButton btnLogout;
     private ImageView imgAvatar;
@@ -138,14 +139,14 @@ public class ProfileFragment extends Fragment {
                     totalAnswer += Integer.parseInt(Objects.requireNonNull(snapshot.child("questionsAnswered").getValue()).toString());
                     totalGame++;
                 }
-                averageAccuracy = roundToTwoDecimalPlaces((double) totalScore / totalAnswer * 100);
+                averageAccuracy = roundToTwoDecimalPlaces((double) totalScore / totalAnswer * 100, 2);
 
                 // Hiển thị thông tin thống kê
                 tvTotalScore.setText(String.valueOf(totalScore));
                 tvTotalGame.setText(String.valueOf(totalGame));
                 tvAverageAccuracy.setText(averageAccuracy + "%");
-                tvTotalTime.setText((roundToTwoDecimalPlaces((double) totalTime / 60)) + " min");
-
+                tvTotalTime.setText((roundToTwoDecimalPlaces((double) totalTime / 60, 2)) + " min");
+                tvTotalAnswer.setText(String.valueOf(totalAnswer));
                 Log.e("totalScore", String.valueOf(totalScore));
                 Log.e("totalAnswer", String.valueOf(totalAnswer));
                 Log.e("averageAccuracy", String.valueOf(averageAccuracy));
@@ -174,6 +175,8 @@ public class ProfileFragment extends Fragment {
         tvTotalScore = v.findViewById(R.id.tv_total_score);
         tvTotalTime = v.findViewById(R.id.tv_total_time);
         tvTotalGame = v.findViewById(R.id.tv_total_game);
+        tvTotalAnswer = v.findViewById(R.id.tv_total_answer);
+
         btnLogout = v.findViewById(R.id.btn_logout);
         imgAvatar = v.findViewById(R.id.iv_avatar);
     }

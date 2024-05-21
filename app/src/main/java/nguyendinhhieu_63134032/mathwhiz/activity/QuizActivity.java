@@ -1,5 +1,7 @@
 package nguyendinhhieu_63134032.mathwhiz.activity;
 
+import static nguyendinhhieu_63134032.mathwhiz.activity.QuizActivity.roundToTwoDecimalPlaces;
+
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -89,7 +91,7 @@ public class QuizActivity extends AppCompatActivity {
         // Đảm bảo rằng quiz không null và có phương thức getKetQua trả về một chuỗi
         if (quiz != null && btn != null) {
             // Kiểm tra câu trả lời của người dùng
-            if (btn.getText().toString().equals(String.valueOf(quiz.getKetQua()))) {
+            if (btn.getText().toString().equals(String.valueOf(roundToTwoDecimalPlaces(quiz.getKetQua(), 2)))) {
                 countCorrectAns++;
                 countAns++;
                 Log.e("dung", countCorrectAns + " " + countAns);
@@ -130,13 +132,13 @@ public class QuizActivity extends AppCompatActivity {
         Set<Double> uniqueOptions = new HashSet<>();
 
         // Thêm kết quả chính xác trước
-        double correctAnswer = roundToTwoDecimalPlaces(quiz.getKetQua());
+        double correctAnswer = roundToTwoDecimalPlaces(quiz.getKetQua(), 2);
         uniqueOptions.add(correctAnswer);
         options.add(correctAnswer);
 
         // Thêm các tùy chọn ngẫu nhiên khác nhau
         while (uniqueOptions.size() < 4) {
-            double randomOption = roundToTwoDecimalPlaces(random.nextInt(21) - 10 + quiz.getKetQua());
+            double randomOption = roundToTwoDecimalPlaces(random.nextInt(21) - 10 + quiz.getKetQua(), 2);
             if (!uniqueOptions.contains(randomOption)) {
                 uniqueOptions.add(randomOption);
                 options.add(randomOption);
@@ -152,8 +154,16 @@ public class QuizActivity extends AppCompatActivity {
         tvQuestion.setText(quiz.getChuoiPhepToan());
     }
     // Hàm để làm tròn số với 2 chữ số thập phân
-    public static double roundToTwoDecimalPlaces(double value) {
-        DecimalFormat df = new DecimalFormat("#.#");
+    public static double roundToTwoDecimalPlaces(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException("Số chữ số sau dấu phẩy phải là số không âm");
+
+        // Tạo chuỗi định dạng dựa trên số lượng chữ số thập phân
+        StringBuilder formatString = new StringBuilder("#.");
+        for (int i = 0; i < places; i++) {
+            formatString.append('#');
+        }
+
+        DecimalFormat df = new DecimalFormat(formatString.toString());
         return Double.parseDouble(df.format(value));
     }
 
@@ -280,7 +290,7 @@ public class QuizActivity extends AppCompatActivity {
         TextView tvAccuracy = dialog.findViewById(R.id.tv_accuracy_game_over);
         TextView tvTotalAns = dialog.findViewById(R.id.tv_total_ans_game_over);
 
-        double accuracy = roundToTwoDecimalPlaces((double) countCorrectAns / countAns * 100);
+        double accuracy = roundToTwoDecimalPlaces((double) countCorrectAns / countAns * 100,2);
         Date date = new Date();
         String stringDate = new SimpleDateFormat("dd-MM-yy HH:mm a").format(date);
 

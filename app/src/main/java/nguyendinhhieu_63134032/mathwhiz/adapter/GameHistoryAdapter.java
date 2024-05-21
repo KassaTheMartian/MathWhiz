@@ -1,5 +1,7 @@
 package nguyendinhhieu_63134032.mathwhiz.adapter;
 
+import static nguyendinhhieu_63134032.mathwhiz.activity.QuizActivity.roundToTwoDecimalPlaces;
+
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,7 +83,7 @@ public class GameHistoryAdapter extends RecyclerView.Adapter{
         viewHolder.tvPlayTime.setText("Time: "+ (gameHistory.getPlayTime()/60) +" min");
         viewHolder.tvTimeStamp.setText(gameHistory.getTimestamp());
         viewHolder.tvOperator.setText(gameHistory.getOperator());
-        viewHolder.tvAccuracy.setText("Accuracy: " + gameHistory.getAccuracy() + "%");
+        viewHolder.tvAccuracy.setText("Accuracy: " + roundToTwoDecimalPlaces((double) gameHistory.getScore()/gameHistory.getQuestionsAnswered()*100,2) + "%");
     }
 
     @Override

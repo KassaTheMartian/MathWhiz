@@ -19,8 +19,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/alata"
             android:hint="hieudeptrai"
-            android:textColorHint="@color/white"
             android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -54,27 +54,27 @@
             android:fontFamily="@font/alata"
             android:gravity="center"
             android:hint="Nguyễn Đình Hiệu"
-            android:textColorHint="@color/white"
             android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="@+id/iv_avatar"
             app:layout_constraintStart_toStartOf="@+id/iv_avatar"
             app:layout_constraintTop_toBottomOf="@+id/iv_avatar" />
 
+
         <TextView
             android:id="@+id/tv_profile_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/alata"
             android:gravity="center"
             android:text="Total game"
             android:textColor="@color/white"
             android:textSize="25sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.125"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_fullname_profile" />
+            app:layout_constraintEnd_toEndOf="@+id/tv_avg_accuracy"
+            app:layout_constraintStart_toStartOf="@+id/tv_avg_accuracy"
+            app:layout_constraintTop_toBottomOf="@+id/tv_avg_accuracy" />
 
         <TextView
             android:id="@+id/tv_total_game"
@@ -83,8 +83,8 @@
             android:fontFamily="@font/alata"
             android:gravity="center"
             android:hint="20"
-            android:textColorHint="#FFD700"
             android:textColor="#FFD700"
+            android:textColorHint="#FFD700"
             android:textSize="35sp"
             app:layout_constraintEnd_toEndOf="@+id/tv_profile_1"
             app:layout_constraintStart_toStartOf="@+id/tv_profile_1"
@@ -94,14 +94,14 @@
             android:id="@+id/tv_profile_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:fontFamily="@font/alata"
             android:gravity="center"
             android:text="Total score"
             android:textColor="@color/white"
             android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.875"
+            app:layout_constraintHorizontal_bias="0.85"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_fullname_profile" />
 
@@ -112,8 +112,8 @@
             android:fontFamily="@font/alata"
             android:gravity="center"
             android:hint="1000"
-            android:textColorHint="#FFD700"
             android:textColor="#FFD700"
+            android:textColorHint="#FFD700"
             android:textSize="35sp"
             app:layout_constraintEnd_toEndOf="@+id/tv_profile_2"
             app:layout_constraintStart_toStartOf="@+id/tv_profile_2"
@@ -129,9 +129,9 @@
             android:text="Accuracy"
             android:textColor="@color/white"
             android:textSize="25sp"
-            app:layout_constraintEnd_toEndOf="@+id/tv_profile_1"
-            app:layout_constraintStart_toStartOf="@+id/tv_profile_1"
-            app:layout_constraintTop_toBottomOf="@+id/tv_total_game" />
+            app:layout_constraintEnd_toEndOf="@+id/tv_total_answer"
+            app:layout_constraintStart_toStartOf="@+id/tv_total_answer"
+            app:layout_constraintTop_toBottomOf="@+id/tv_total_answer" />
 
         <TextView
             android:id="@+id/tv_avg_accuracy"
@@ -140,8 +140,8 @@
             android:fontFamily="@font/alata"
             android:gravity="center"
             android:hint="47.47%"
-            android:textColorHint="#FFD700"
             android:textColor="#FFD700"
+            android:textColorHint="#FFD700"
             android:textSize="35sp"
             app:layout_constraintEnd_toEndOf="@+id/tv_profile_3"
             app:layout_constraintHorizontal_bias="0.505"
@@ -158,8 +158,8 @@
             android:text="Total time"
             android:textColor="@color/white"
             android:textSize="25sp"
-            app:layout_constraintEnd_toEndOf="@+id/tv_profile_2"
-            app:layout_constraintStart_toStartOf="@+id/tv_profile_2"
+            app:layout_constraintEnd_toEndOf="@+id/tv_total_score"
+            app:layout_constraintStart_toStartOf="@+id/tv_total_score"
             app:layout_constraintTop_toBottomOf="@+id/tv_total_score" />
 
         <TextView
@@ -169,13 +169,41 @@
             android:fontFamily="@font/alata"
             android:gravity="center"
             android:hint="120 min"
-            android:textColorHint="#FFD700"
             android:textColor="#FFD700"
+            android:textColorHint="#FFD700"
             android:textSize="35sp"
             app:layout_constraintEnd_toEndOf="@+id/tv_profile_4"
-            app:layout_constraintHorizontal_bias="0.505"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/tv_profile_4"
-            app:layout_constraintTop_toBottomOf="@+id/tv_profile_3" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_profile_4" />
 
+        <TextView
+            android:id="@+id/tv_profile_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/alata"
+            android:gravity="center"
+            android:text="Total answer"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.15"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_fullname_profile" />
+
+        <TextView
+            android:id="@+id/tv_total_answer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alata"
+            android:gravity="center"
+            android:hint="1500"
+            android:textColor="#FFD700"
+            android:textColorHint="#FFD700"
+            android:textSize="35sp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_profile_6"
+            app:layout_constraintStart_toStartOf="@+id/tv_profile_6"
+            app:layout_constraintTop_toBottomOf="@+id/tv_profile_6" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
