@@ -5,6 +5,228 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.GameOverActivity">
+    tools:context=".activity.GameOverActivity"
+    android:background="#1B1E23">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:background="@drawable/rounded_rectangle"
+        android:backgroundTint="#4E596F"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_game_over"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/rounded_rectangle"
+            android:fontFamily="@font/alata"
+            android:paddingHorizontal="20dp"
+            android:text="GAME OVER"
+            android:textColor="@color/white"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/alata"
+            android:text="Time"
+            android:textColor="#F88360"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_level_game_over" />
+
+        <TextView
+            android:id="@+id/tv_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/alata"
+            android:text="Level"
+            android:textColor="#F88360"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_game_over" />
+
+        <TextView
+            android:id="@+id/tv_time_game_over"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alata"
+            android:text="2 min"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tv_1"
+            app:layout_constraintStart_toStartOf="@+id/tv_1"
+            app:layout_constraintTop_toBottomOf="@+id/tv_1" />
+
+        <TextView
+            android:id="@+id/tv_level_game_over"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alata"
+            android:text="Hard"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tv_5"
+            app:layout_constraintStart_toStartOf="@+id/tv_5"
+            app:layout_constraintTop_toBottomOf="@+id/tv_5" />
+
+        <TextView
+            android:id="@+id/tv_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/alata"
+            android:text="Score"
+            android:textColor="#F88360"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tv_operator_game_over"
+            app:layout_constraintStart_toStartOf="@+id/tv_operator_game_over"
+            app:layout_constraintTop_toBottomOf="@+id/tv_operator_game_over" />
+
+        <TextView
+            android:id="@+id/tv_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="80dp"
+            android:fontFamily="@font/alata"
+            android:text="Score"
+            android:textColor="#F88360"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_game_over" />
+
+        <TextView
+            android:id="@+id/tv_score_game_over"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alata"
+            android:text="20"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tv_2"
+            app:layout_constraintStart_toStartOf="@+id/tv_2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_2" />
+
+        <TextView
+            android:id="@+id/tv_operator_game_over"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alata"
+            android:text="+-*/"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tv_6"
+            app:layout_constraintStart_toStartOf="@+id/tv_6"
+            app:layout_constraintTop_toBottomOf="@+id/tv_6" />
+
+        <TextView
+            android:id="@+id/tv_total_ans_game_over"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alata"
+            android:text="20"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tv_4"
+            app:layout_constraintStart_toStartOf="@+id/tv_4"
+            app:layout_constraintTop_toBottomOf="@+id/tv_4" />
+
+        <TextView
+            android:id="@+id/tv_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/alata"
+            android:text="Total Ans"
+            android:textColor="#F88360"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tv_score_game_over"
+            app:layout_constraintStart_toStartOf="@+id/tv_score_game_over"
+            app:layout_constraintTop_toBottomOf="@+id/tv_score_game_over" />
+
+        <TextView
+            android:id="@+id/tv_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/alata"
+            android:text="Accuracy"
+            android:textColor="#F88360"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tv_time_game_over"
+            app:layout_constraintStart_toStartOf="@+id/tv_time_game_over"
+            app:layout_constraintTop_toBottomOf="@+id/tv_time_game_over" />
+
+        <TextView
+            android:id="@+id/tv_accuracy_game_over"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alata"
+            android:text="50%"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tv_3"
+            app:layout_constraintStart_toStartOf="@+id/tv_3"
+            app:layout_constraintTop_toBottomOf="@+id/tv_3" />
+
+        <Button
+            android:id="@+id/btn_retry_game_over"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rounded_rectangle"
+            android:backgroundTint="#F9E8D4"
+            android:fontFamily="@font/alata"
+            android:text="retry"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tv_accuracy_game_over"
+            app:layout_constraintStart_toStartOf="@+id/tv_accuracy_game_over"
+            app:layout_constraintTop_toBottomOf="@+id/tv_accuracy_game_over" />
+
+        <Button
+            android:id="@+id/btn_exit_game_over"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/rounded_rectangle"
+            android:backgroundTint="#F9E8D4"
+            android:fontFamily="@font/alata"
+            android:text="EXIT"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tv_total_ans_game_over"
+            app:layout_constraintStart_toStartOf="@+id/tv_total_ans_game_over"
+            app:layout_constraintTop_toBottomOf="@+id/tv_total_ans_game_over"
+            app:layout_constraintVertical_bias="0.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,5 @@
 package nguyendinhhieu_63134032.mathwhiz.activity;
 
-import static nguyendinhhieu_63134032.mathwhiz.activity.QuizActivity.roundToTwoDecimalPlaces;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -43,8 +41,9 @@ public class QuizActivity extends AppCompatActivity {
     // Khai báo các biến
     // Đối tượng Quiz lưu trữ giá trị của câu hỏi hiện tại, biến này luôn được tạo mới sau một câu hỏi
     private Quiz quiz;
+    private ArrayList<GameHistory> listHistory = new ArrayList<>();
     private int countAns = 0; // Đếm số câu trả lời
-    private int countCorrectAns = 0; // Đếm số câu trả lời đúng
+    private int score = 0; // Đếm số câu trả lời đúng
     private int seconds = 0; // Đếm số giây
     private int level = 0; // Hộ khó của câu hỏi (số lượng số trong câu hỏi)
     private int time = 0; // Thời gian chơi (hết thời gian sẽ game over)
@@ -78,7 +77,7 @@ public class QuizActivity extends AppCompatActivity {
         time = intent.getIntExtra("time", 60);
         operator = intent.getStringExtra("operation");
         currentUser = intent.getStringExtra("currentUser");
-        getControls();
+        initViews();
         newGame();
         btnA.setOnClickListener(v -> chooseAns(btnA));
         btnB.setOnClickListener(v -> chooseAns(btnB));
@@ -92,13 +91,13 @@ public class QuizActivity extends AppCompatActivity {
         if (quiz != null && btn != null) {
             // Kiểm tra câu trả lời của người dùng
             if (btn.getText().toString().equals(String.valueOf(roundToTwoDecimalPlaces(quiz.getKetQua(), 2)))) {
-                countCorrectAns++;
+                score++;
                 countAns++;
-                Log.e("dung", countCorrectAns + " " + countAns);
+                Log.e("dung", score + " " + countAns);
             }
             else {
                 countAns++;
-                Log.e("sai", countCorrectAns + " " + countAns);
+                Log.e("sai", score + " " + countAns);
             }
             newQues();
         } else {
@@ -111,9 +110,9 @@ public class QuizActivity extends AppCompatActivity {
         quiz = new Quiz(level, operator);
         // Đặt số câu trả lời đúng và tổng số câu trả lời về 0
         countAns = 0;
-        countCorrectAns = 0;
+        score = 0;
         seconds = 0;
-        tvScore.setText("Score " +  countCorrectAns);
+        tvScore.setText("Score " + score);
         // Hiển thị câu hỏi
         tvQuestion.setText(quiz.getChuoiPhepToan());
         // Hiển thị câu trả lời
@@ -122,7 +121,7 @@ public class QuizActivity extends AppCompatActivity {
 
     public void newQues(){
         quiz = new Quiz(level, operator);
-        tvScore.setText("Score " + countCorrectAns);
+        tvScore.setText("Score " + score);
         setAns(quiz);
     }
     public void setAns(Quiz quiz){
@@ -191,7 +190,7 @@ public class QuizActivity extends AppCompatActivity {
 //        dialog.show();
 //    }
     // Hàm để lấy các điều khiển từ giao diện
-    public void getControls(){
+    public void initViews(){
         btnA = (Button) findViewById(R.id.bnt_a);
         btnB = (Button) findViewById(R.id.bnt_b);
         btnC = (Button) findViewById(R.id.bnt_c);
@@ -256,6 +255,7 @@ public class QuizActivity extends AppCompatActivity {
 
         btnExit.setOnClickListener(v -> {
             dialog.dismiss();
+            addGameHistory(currentUser, listHistory);
             finish();
         });
 
@@ -264,7 +264,7 @@ public class QuizActivity extends AppCompatActivity {
         activityView.setAlpha(0.5f);
         dialog.setOnDismissListener(dialog1 -> activityView.setAlpha(1f));
     }
-    // Hàm để mở hộp thoại kết thúc trò chơi
+    //Hàm để mở hộp thoại kết thúc trò chơi
     private void openGameOverDialog(){
         final Dialog dialog = new Dialog(QuizActivity.this);
         activityView = findViewById(R.id.main);
@@ -290,19 +290,17 @@ public class QuizActivity extends AppCompatActivity {
         TextView tvAccuracy = dialog.findViewById(R.id.tv_accuracy_game_over);
         TextView tvTotalAns = dialog.findViewById(R.id.tv_total_ans_game_over);
 
-        double accuracy = roundToTwoDecimalPlaces((double) countCorrectAns / countAns * 100,2);
+        double accuracy = roundToTwoDecimalPlaces((double) score / countAns * 100,2);
         Date date = new Date();
         String stringDate = new SimpleDateFormat("dd-MM-yy HH:mm a").format(date);
 
-
-        tvScore.setText(String.valueOf(countCorrectAns));
+        listHistory.add(new GameHistory(score, countAns, time, accuracy , stringDate, String.valueOf(level), operator));
+        tvScore.setText(String.valueOf(score));
         tvTimeGameOver.setText(tvTime.getText().toString());
         tvAccuracy.setText(accuracy + "%");
         tvTotalAns.setText(String.valueOf(countAns));
         btnNewGame.setOnClickListener(v -> {
             // Lưu lịch sử chơi
-            GameHistory gameHistory = new GameHistory(countCorrectAns, countAns, time, accuracy,stringDate, String.valueOf(level), operator);
-            addGameHistory(currentUser,gameHistory);
             dialog.dismiss();
             onResume();
             newGame();
@@ -310,8 +308,7 @@ public class QuizActivity extends AppCompatActivity {
 
         btnExit.setOnClickListener(v -> {
             // Lưu lịch sử chơi
-            GameHistory gameHistory = new GameHistory(countCorrectAns, countAns, time, accuracy,stringDate, String.valueOf(level), operator);
-            addGameHistory(currentUser,gameHistory);
+            addGameHistory(currentUser,listHistory);
             dialog.dismiss();
             finish();
         });
@@ -322,23 +319,36 @@ public class QuizActivity extends AppCompatActivity {
         activityView.setAlpha(0.5f);
         dialog.setOnDismissListener(dialog1 -> activityView.setAlpha(1f));
     }
+    private void openGamOverActivity(){
+        Intent intent = new Intent(QuizActivity.this, GameOverActivity.class);
 
+        intent.putExtra("level", level);
+        intent.putExtra("time", time);
+        intent.putExtra("score", score);
+        intent.putExtra("countAns", countAns);
+        intent.putExtra("time", seconds);
+        intent.putExtra("level", level);
+        intent.putExtra("operator", operator);
+        intent.putExtra("currentUser", currentUser);
+        startActivity(intent);
+    }
     // Lưu lịch sử chơi vào Firebase
-    private void addGameHistory(String username, GameHistory gameHistory) {
+    private void addGameHistory(String username, ArrayList<GameHistory> listHistory) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference usersRef = database.getReference("users").child(username).child("history");
-        // Tạo một khóa ngẫu nhiên
 
-        String historyId = usersRef.push().getKey();
-        // Tạo đối tượng HashMap
-
+        for (GameHistory gameHistory : listHistory) {
+            // Tạo một khóa ngẫu nhiên
+            String historyId = usersRef.push().getKey();
+            // Thêm lịch sử chơi vào Firebase
+            if (historyId != null)
+                usersRef.child(historyId).setValue(gameHistory);
+        }
+        // Tạo đối tượng HashMap để lưu trữ lịch sử chơi
 //        HashMap<String, Object> item = new HashMap<>();
 //        item.put(historyId, gameHistory.toFirebaseObject());
 //
 //        usersRef.updateChildren(item);
-        // Thêm lịch sử chơi vào Firebase
-        if (historyId != null)
-            usersRef.child(historyId).setValue(gameHistory);
     }
     // Hàm để bắt đầu bộ đếm thời gian
     @Override
