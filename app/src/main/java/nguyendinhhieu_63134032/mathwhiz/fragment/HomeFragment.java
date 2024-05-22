@@ -32,8 +32,8 @@ public class HomeFragment extends Fragment {
     private Button btnEndless;
     private Button btnHardcore;
     private String currentUser;
-    private int time = 10;
-    //private int time = 60;
+    //private int time = 10;
+    private int time = 60;
 
     private int level = 2;
     private String operation = "+-*/";
