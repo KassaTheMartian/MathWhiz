@@ -23,7 +23,7 @@ public class GameHistoryAdapter extends RecyclerView.Adapter{
     public GameHistoryAdapter(ArrayList<GameHistory> dataSource) {
         this.dataSource = dataSource;
     }
-    public class GameHistoryItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class GameHistoryItemViewHolder extends RecyclerView.ViewHolder{
         TextView tvLevel;
         TextView tvScore;
         TextView tvPlayTime;
@@ -33,18 +33,12 @@ public class GameHistoryAdapter extends RecyclerView.Adapter{
         public int position;
         public GameHistoryItemViewHolder(@NonNull View itemView) {
             super(itemView);
-            itemView.setOnClickListener(this);
             tvLevel = itemView.findViewById(R.id.tv_item_level);
             tvScore = itemView.findViewById(R.id.tv_item_score);
             tvPlayTime = itemView.findViewById(R.id.tv_item_play_time);
             tvTimeStamp = itemView.findViewById(R.id.tv_item_timestamp);
             tvOperator = itemView.findViewById(R.id.tv_item_operations);
             tvAccuracy = itemView.findViewById(R.id.tv_item_accuracy);
-        }
-
-        @Override
-        public void onClick(View v) {
-            Toast.makeText(v.getContext(), "hehehe", Toast.LENGTH_SHORT).show();
         }
     }
 

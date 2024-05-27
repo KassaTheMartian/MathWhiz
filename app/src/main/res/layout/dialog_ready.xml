@@ -74,7 +74,7 @@
         android:layout_marginTop="10dp"
         android:fontFamily="@font/alata"
         android:paddingBottom="10dp"
-        android:text="Play Mode"
+        android:text="Level"
         android:textColor="@color/white"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"

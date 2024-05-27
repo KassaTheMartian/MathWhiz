@@ -5,14 +5,14 @@ import java.util.Stack;
 
 public class Quiz {
     String chuoiPhepToan;
-    double ketQua;
+    double answer;
     public Quiz(String phepToan) {
         this.chuoiPhepToan = phepToan;
     }
 
     public Quiz(int n, String phepToan){
         this.chuoiPhepToan = taoChuoiPhepToan(n, phepToan);
-        this.ketQua = tinhChuoiPhepToan();
+        this.answer = tinhChuoiPhepToan();
     }
 
     public static String taoChuoiPhepToan(int n, String phepToan) {
@@ -101,7 +101,7 @@ public class Quiz {
         return chuoiPhepToan;
     }
 
-    public double getKetQua() {
-        return ketQua;
+    public double getAnswer() {
+        return answer;
     }
 }

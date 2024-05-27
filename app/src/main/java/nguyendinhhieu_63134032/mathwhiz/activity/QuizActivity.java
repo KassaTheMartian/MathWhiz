@@ -90,7 +90,7 @@ public class QuizActivity extends AppCompatActivity {
         // Đảm bảo rằng quiz không null và có phương thức getKetQua trả về một chuỗi
         if (quiz != null && btn != null) {
             // Kiểm tra câu trả lời của người dùng
-            if (btn.getText().toString().equals(String.valueOf(roundToTwoDecimalPlaces(quiz.getKetQua(), 2)))) {
+            if (btn.getText().toString().equals(String.valueOf(roundToTwoDecimalPlaces(quiz.getAnswer(), 2)))) {
                 score++;
                 countAns++;
                 Log.e("dung", score + " " + countAns);
@@ -131,13 +131,13 @@ public class QuizActivity extends AppCompatActivity {
         Set<Double> uniqueOptions = new HashSet<>();
 
         // Thêm kết quả chính xác trước
-        double correctAnswer = roundToTwoDecimalPlaces(quiz.getKetQua(), 2);
+        double correctAnswer = roundToTwoDecimalPlaces(quiz.getAnswer(), 2);
         uniqueOptions.add(correctAnswer);
         options.add(correctAnswer);
 
         // Thêm các tùy chọn ngẫu nhiên khác nhau
         while (uniqueOptions.size() < 4) {
-            double randomOption = roundToTwoDecimalPlaces(random.nextInt(21) - 10 + quiz.getKetQua(), 2);
+            double randomOption = roundToTwoDecimalPlaces(random.nextInt(21) - 10 + quiz.getAnswer(), 2);
             if (!uniqueOptions.contains(randomOption)) {
                 uniqueOptions.add(randomOption);
                 options.add(randomOption);

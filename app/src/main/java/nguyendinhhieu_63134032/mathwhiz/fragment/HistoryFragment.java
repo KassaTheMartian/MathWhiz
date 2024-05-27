@@ -87,7 +87,9 @@ public class HistoryFragment extends Fragment {
 
         listGameHistory = new ArrayList<>();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = database.getReference("users").child(currentUser).child("history");
+        DatabaseReference databaseReference = database.getReference("users")
+                .child(currentUser)
+                .child("history");
         databaseReference.addValueEventListener(valueEventListener);
 
         RecyclerView recyclerView = view.findViewById(R.id.rv_history);
@@ -106,8 +108,8 @@ public class HistoryFragment extends Fragment {
             listGameHistory.clear();
             // Lấy dữ liệu vào một biến snapshot, đưa vào một danh sách để xử lý
             for (DataSnapshot obj: snapshot.getChildren()){
-                GameHistory task = obj.getValue(GameHistory.class);
-                listGameHistory.add(task);
+                GameHistory gameHistory = obj.getValue(GameHistory.class);
+                listGameHistory.add(gameHistory);
             }
             adapter.notifyDataSetChanged();
         }
