@@ -18,6 +18,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import nguyendinhhieu_63134032.mathwhiz.R;
 import nguyendinhhieu_63134032.mathwhiz.model.User;
 
@@ -68,13 +70,15 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(this, "Password and Confirm Password do not match", Toast.LENGTH_SHORT).show();
             return;
         }
-//        // Mã hóa mật khẩu trước khi lưu trữ (sử dụng BCrypt hoặc các phương pháp mã hóa khác)
-//        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
-//        // Tạo người dùng mới
-//        User user = new User(username, fullname, hashedPassword);
+
         // Create a new user
-        User user = new User(username, fullname, password);
+        //User user = new User(username, fullname, password);
         // Save the user to the database
+
+        // Mã hóa mật khẩu trước khi lưu trữ (sử dụng BCrypt)
+        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+        // Tạo người dùng mới
+        User user = new User(username, fullname, hashedPassword);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference usersRef = database.getReference("users");
         usersRef.child(username).setValue(user);

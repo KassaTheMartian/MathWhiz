@@ -46,5 +46,7 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
 
     implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation("org.mindrot:jbcrypt:0.4")
+
 
 }

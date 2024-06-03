@@ -96,7 +96,9 @@ public class GameOverActivity extends AppCompatActivity {
     // Lưu lịch sử chơi vào Firebase
     private void addGameHistory(String username, GameHistory gameHistory) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference usersRef = database.getReference("users").child(username).child("history");
+        DatabaseReference usersRef = database.getReference("users")
+                                            .child(username)
+                                            .child("history");
         // Tạo một khóa ngẫu nhiên
         String historyId = usersRef.push().getKey();
         // Thêm lịch sử chơi vào Firebase

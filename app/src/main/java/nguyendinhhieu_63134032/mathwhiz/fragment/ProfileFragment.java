@@ -123,7 +123,10 @@ public class ProfileFragment extends Fragment {
             }
         });
         // Lấy thông tin thống kê lịch sử chơi game
-        database.getReference().child("users").child(username).child("history").addValueEventListener(new ValueEventListener() {
+        database.getReference().child("users")
+                .child(username)
+                .child("history")
+                .addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // Tính toán thông tin thống kê

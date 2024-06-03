@@ -19,6 +19,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import nguyendinhhieu_63134032.mathwhiz.R;
 import nguyendinhhieu_63134032.mathwhiz.model.User;
 
@@ -70,7 +72,8 @@ public class LoginActivity extends AppCompatActivity {
                         User user = dataSnapshot.getValue(User.class);
                         if (user != null) {
                             // Xác thực mật khẩu
-                            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                            if (user.getUsername().equals(username)
+                                    && BCrypt.checkpw(password, user.getPassword())) {
                                 // Đăng nhập thành công chuyển sang activity tiếp theo
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.putExtra("currentUser", user.getUsername());

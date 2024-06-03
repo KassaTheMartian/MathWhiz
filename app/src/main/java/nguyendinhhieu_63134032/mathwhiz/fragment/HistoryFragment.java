@@ -87,9 +87,11 @@ public class HistoryFragment extends Fragment {
 
         listGameHistory = new ArrayList<>();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
+
         DatabaseReference databaseReference = database.getReference("users")
-                .child(currentUser)
-                .child("history");
+                                                        .child(currentUser)
+                                                        .child("history");
+
         databaseReference.addValueEventListener(valueEventListener);
 
         RecyclerView recyclerView = view.findViewById(R.id.rv_history);
